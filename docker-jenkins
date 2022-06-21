@@ -1,10 +1,12 @@
-FROM jenkins
+FROM jenkins/jenkins:latest
+#ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
 USER root
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install python-pip -y
+RUN apt-get install python3-pip -y
 RUN pip install robotframework
 COPY plugins.txt /tmp/
-RUN /usr/local/bin/plugins.sh /tmp/plugins.txt
+#RUN /usr/local/bin/install-plugins.sh /tmp/plugins.txt
 
 USER jenkins
+
